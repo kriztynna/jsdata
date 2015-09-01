@@ -7,7 +7,9 @@ app.config(function($stateProvider) {
 		controller: 'PostCtrl', 
 		resolve: {
 			post: function(Post, $stateParams){
-				return Post.find($stateParams.postId);
+				return Post.find($stateParams.postId).then(function (post) {
+					return Post.loadRelations(post, ['users'])
+				});
 			}
 		}
 	})
@@ -16,6 +18,7 @@ app.config(function($stateProvider) {
 // add necessary dependencies 
 app.controller('PostCtrl', function(User, Post, $stateParams, $state, $scope, post) {
 	$scope.post = post;
+	$scope.post.author = post.users;
 	function findPost () {
 		
 		/* 1. FIND POST
@@ -41,3 +44,14 @@ app.controller('PostCtrl', function(User, Post, $stateParams, $state, $scope, po
 		*/	
 	};
 })
+
+// User.find(10).then(function (user) {
+//   // let's assume the server only returned the user
+//   user.comments; // undefined
+//   user.profile; // undefined
+  
+//   return User.loadRelations(user, ['comment', 'profile']);
+// }).then(function (user) {
+//   user.comments; // array
+//   user.profile; // object
+// });
