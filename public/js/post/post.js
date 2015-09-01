@@ -13,6 +13,19 @@ app.config(function($stateProvider) {
 			}
 		}
 	})
+	.state('post.delete', {
+		url: '/delete',
+		controller: function ($state) { 
+			$state.go('main')
+			},
+		resolve: {
+			destroy: function(Post, $stateParams, $state) {
+				return Post.destroy($stateParams.postId).then(function () {
+					$state.go('main')
+				});
+			}
+		}
+	})
 });
 
 // add necessary dependencies 
@@ -45,13 +58,6 @@ app.controller('PostCtrl', function(User, Post, $stateParams, $state, $scope, po
 	};
 })
 
-// User.find(10).then(function (user) {
-//   // let's assume the server only returned the user
-//   user.comments; // undefined
-//   user.profile; // undefined
-  
-//   return User.loadRelations(user, ['comment', 'profile']);
-// }).then(function (user) {
-//   user.comments; // array
-//   user.profile; // object
-// });
+app.controller('DelCtrl', function($state) {
+	$state.go('main');
+})

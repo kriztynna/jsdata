@@ -7,10 +7,10 @@
 		<h2>{{post.title}}</h2>
 		<h4>{{post.author.username}}</h4>
     <!-- add functionality that makes this Edit button work -->
-		<button type="button" class="btn btn-primary">Edit</button>
+		<button type="button" class="btn btn-primary ui-sref" ui-sref="post.edit">Edit</button>
 
     <!-- add functionality that makes this Delete button work -->
-		<button type="button" class="btn btn-primary btn-danger">Delete</button>
+		<button type="button" class="btn btn-primary btn-danger" ui-sref="post.delete">Delete</button>
 	</div>
 
   <!-- display the user's name by accessing the user object embedded in the post -->
