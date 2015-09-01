@@ -7,7 +7,6 @@ app.config(function($stateProvider) {
 		controller: 'PostCtrl', 
 		resolve: {
 			post: function(Post, $stateParams){
-				console.log($stateParams.postId);
 				return Post.find($stateParams.postId);
 			}
 		}

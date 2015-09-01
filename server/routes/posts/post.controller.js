@@ -16,8 +16,11 @@ module.exports = {
 
   show: function(req, res, next){
     Post.findById(req.params.id).exec()
-    .then(function(post) {
-      res.json(post);
+    .then(function(post){
+      return Post.populate(post,[{path: 'author', model:'User'}]);
+    })
+    .then(function(populatedPost) {
+      res.json(populatedPost);
     })
     .then(null, next)
   },

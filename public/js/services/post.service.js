@@ -6,8 +6,8 @@ app.factory('Post', function(DS, $state) {
         idAttribute: '_id',
         name: 'posts',
         belongsTo: {
-            user: {
-                localField: 'user',
+            users: {
+                localField: 'users',
                 localKey: 'author'
             }
         },
